@@ -103,8 +103,8 @@ footer{text-align:center;color:var(--mut);font-size:12px;padding:30px 20px 40px;
   <h1>I build backends<br>and RAG that <em>ship</em>.</h1>
   <p class="sub">Computer Science student at IIIT Manipur. I design retrieval pipelines, concurrent booking systems and async data services, and I measure what I build.</p>
   <div class="stats mono">
-    <div class="stat"><b>92%</b><span>top-9 retrieval accuracy, 52 answerable queries (TF-IDF alone: 69%)</span></div>
-    <div class="stat"><b>20/20</b><span>of my 20 tested injection attacks blocked</span></div>
+    <div class="stat"><b>0.706</b><span>nDCG@10 on the SciFact test split with hybrid retrieval</span></div>
+    <div class="stat"><b>98%</b><span>Recall@100 on the SciFact test split</span></div>
     <div class="stat"><b>9.27</b><span>CGPA, 6 semesters</span></div>
   </div>
   <div class="cta">
@@ -118,15 +118,15 @@ footer{text-align:center;color:var(--mut);font-size:12px;padding:30px 20px 40px;
   <h2 class="rv"><small class="mono">01</small>Projects</h2>
 
   <article class="card rv">
-    <header><h3>SmartRAG: Retrieval Augmented Generation System</h3><span class="tag mono">IEEE TENCON 2026</span></header>
-    <div class="stack mono">Python · FastAPI · LangChain · PostgreSQL · TF-IDF · BM25 · Groq Llama 3.3 70B</div>
+    <header><h3>SmartRAG: Retrieval-Augmented Generation System</h3><span class="tag mono">IEEE TENCON 2026</span></header>
+    <div class="stack mono">Python · FastAPI · BGE · BM25 · Reciprocal Rank Fusion · Cross-Encoder Reranking · Gemini</div>
     <ul>
-      <li>Designed and deployed a production RAG pipeline for multi-document collections of 500+ pages behind a FastAPI backend on Render, with <b>2.47s</b> average end-to-end query latency on a 10-document, 864-chunk evaluation corpus.</li>
-      <li>Retrieval accuracy counts a query as correct when the right passage appears in the top 9 retrieved chunks. On a 60-query test set (52 answerable, 8 out-of-scope), a 70/30 weighted hybrid of HashingVectorizer TF-IDF and BM25 reached <b>92%</b> (48 of 52), versus 69% (36 of 52) for TF-IDF alone. All 8 out-of-scope queries returned unanswerable.</li>
-      <li>Cut peak memory from roughly 700MB (OOM crash) to <b>60 to 80MB</b> by replacing TfidfVectorizer with HashingVectorizer, which keeps memory fixed as the corpus grows.</li>
-      <li>Built a three-layer anti-poisoning pipeline (regex sanitization, binary hard-cap trust scoring, retrieval-time blocking) against prompt injection through ingested documents. Tested against 20 adversarial prompt-injection attempts across 4 attack categories, it stopped all <b>20</b>. This result covers my test set only, not every possible injection.</li>
+      <li>Engineered a hybrid retrieval pipeline combining BGE dense embeddings, BM25, and Reciprocal Rank Fusion, achieving <b>0.706 nDCG@10</b> and <b>98.0% Recall@100</b> on the SciFact test split.</li>
+      <li>Benchmarked BM25, dense retrieval, hybrid fusion, and cross-encoder reranking using nDCG@10, Recall@K, MRR, latency measurements, and paired bootstrap confidence intervals; improved nDCG@10 by <b>0.138</b> over the lexical baseline.</li>
+      <li>Implemented conversational query rewriting and optional cross-encoder reranking, measuring quality and latency trade-offs rather than assuming reranking always improves results.</li>
+      <li>Evaluated prompt-injection defenses across multiple attack categories, measuring <b>70% attack detection</b> and a <b>25% false-positive rate</b> on the tested samples; identified weaknesses in encoded, multilingual, and paraphrased attacks.</li>
     </ul>
-    <div class="src"><a href="https://github.com/nish90033-lang/SmartRAG" target="_blank" rel="noopener">View Source</a><a href="https://smartrag-frontend.onrender.com" target="_blank" rel="noopener">Live Demo</a></div>
+    <div class="src"><a href="https://github.com/nish90033-lang/UpgradedRAG" target="_blank" rel="noopener">View Source</a></div>
   </article>
 
   <article class="card rv">
